@@ -10,7 +10,7 @@ Hints and Tips
 Requirements
 -Users should see a 3x3 grid for the tic-tac-toe board																		DONE
 -Add a reset button that will clear the contents of the board																DONE
--Deploy your game online, using GitHub pages. If you're not sure how to do this, refer back to the earlier GitHub lesson.
+-Deploy your game online, using GitHub pages. If you're not sure how to do this, refer back to the earlier GitHub lesson. 	***NOT YET***
 -->
 <!DOCTYPE html>
 <html>		
@@ -22,7 +22,7 @@ Requirements
 	<!-- Header with Tic tac toe heading and Reset button -->
 	<header>
 		<h1>TIC * TAC * TOE</h1>
-		<button>Reset</button>
+		<button id="button-reset">Reset</button>
 	</header>
 
 	<body class="container">
@@ -31,19 +31,19 @@ Requirements
 		<table id="gameboard">
 			<tbody>
 				<tr class="top-row">
-					<td id="top-left" class="left-column">x</td>
-					<td id="top-middle" class="middle-column">x</td>
-					<td id="top-right" class="right-column">x</td>
+					<td id="top-left" class="left-column left-diagonal"></td>
+					<td id="top-middle" class="middle-column"></td>
+					<td id="top-right" class="right-column right-diagonal"></td>
 				</tr>
 				<tr class="middle-row">
-					<td id="middle-left" class="left-column">x</td>
-					<td id="middle-middle" class="middle-column">x</td>
-					<td id="middle-right" class="right-column">x</td>
+					<td id="middle-left" class="left-column"></td>
+					<td id="middle-middle" class="middle-column left-diagonal right-diagonal"></td>
+					<td id="middle-right" class="right-column"></td>
 				</tr>
 				<tr class="bottom-row">
-					<td id="bottom-left" class="left-column">x</td>
-					<td id="bottom-middle" class="middle-column">x</td>
-					<td id="bottom-right" class="right-column">x</td>
+					<td id="bottom-left" class="left-column right-diagonal"></td>
+					<td id="bottom-middle" class="middle-column"></td>
+					<td id="bottom-right" class="right-column left-diagonal"></td>
 				</tr>
 			</tbody>
 		</table>
