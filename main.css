@@ -1,0 +1,74 @@
+
+BONUS
+-Fix te layout of the header
+-Style the heading
+-style the reset button
+-Style the gameboard
+-Use cats and dogs instead of Xs and Os
+-Add some basic animations using CSS animations
+*/
+* {
+	text-align: center;
+}
+
+.container {
+	margin: 0;
+}
+
+h1 {
+	/*margin: 2%;*/
+	margin: 0;
+	width: 50%;
+}
+
+button {
+	float: right;
+	top: 0;
+}
+
+header {
+	margin: 2%;
+}
+
+table#gameboard {
+	clear: both;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+	height: 600px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+td {
+	width: 30%;
+	height: 33%;
+	border: 1px solid black;
+}
+
+
+
+/*Testing to see if classes and IDs will work for vanilla JS*/
+
+/*
+#bottom-right {
+	background-color: pink;
+}
+.left-column {
+	background-color: pink;
+}
+.middle-column {
+	background-color: orange;
+}
+.right-column {
+	background-color: yellow;
+}
+.top-row {
+	background-color: pink;
+}
+.middle-row {
+	background-color: orange;
+}
+.bottom-row {
+	background-color: yellow;
+}

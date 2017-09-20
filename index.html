@@ -1,0 +1,54 @@
+<!-- 
+Hints and Tips
+
+1. Construct a index.html to be your starting point on this project. 														DONE
+	Add your necessary HTML tags, including script and link tags to link to your JavaScript and CSS, respectively.  		DONE
+2. Before you even start working with JavaScript, construct the gameboard. 													DONE
+	The gameboard page should include the 3x3 grid and at minimum, a reset button. 											DONE
+	Using id and class on clickable elements will help you wire this up in JavaScript afterwards. 							DONE
+
+Requirements
+-Users should see a 3x3 grid for the tic-tac-toe board																		DONE
+-Add a reset button that will clear the contents of the board																DONE
+-Deploy your game online, using GitHub pages. If you're not sure how to do this, refer back to the earlier GitHub lesson.
+-->
+<!DOCTYPE html>
+<html>		
+	<head>
+		<title>Tic Tac Toe</title>
+		<link rel="stylesheet" type="text/css" href="main.css">
+	</head>
+
+	<!-- Header with Tic tac toe heading and Reset button -->
+	<header>
+		<h1>TIC * TAC * TOE</h1>
+		<button>Reset</button>
+	</header>
+
+	<body class="container">
+
+		<!-- Tic tac toe gameboard -->
+		<table id="gameboard">
+			<tbody>
+				<tr class="top-row">
+					<td id="top-left" class="left-column">x</td>
+					<td id="top-middle" class="middle-column">x</td>
+					<td id="top-right" class="right-column">x</td>
+				</tr>
+				<tr class="middle-row">
+					<td id="middle-left" class="left-column">x</td>
+					<td id="middle-middle" class="middle-column">x</td>
+					<td id="middle-right" class="right-column">x</td>
+				</tr>
+				<tr class="bottom-row">
+					<td id="bottom-left" class="left-column">x</td>
+					<td id="bottom-middle" class="middle-column">x</td>
+					<td id="bottom-right" class="right-column">x</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+	<script src="app.js"></script>
+	</body>
+</html>
