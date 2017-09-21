@@ -1,7 +1,8 @@
 What are some ADTs that would help dry out the Tic Tac Toe code?
---each individual cell
+--each individual cells                                               DONE!
 --each pattern of winning cells (rows, columns, diagonals)
 	--checking for a win function
 --updating the cell styling/content/sound etc.
 
---
+Create a Constructor object in your JS code for each ADT you identified
+--Do one at a time

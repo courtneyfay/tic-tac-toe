@@ -25,141 +25,129 @@ BONUS
 */ 
 
 console.log("JS is loaded!");
-//is there a vanilla JS equivalent to .ready() ?
 
-// other global variables
-let numberOfClicks = 0;
+//vanilla JS equivalent to .ready()
+document.addEventListener('DOMContentLoaded', function() {
 
-//sweet music sounds
-let princessZeldaNoise = new Audio("media/zelda.mp3");
-let yoshiNoise = new Audio("media/yoshi.mp3");
+	 // global variables
+	let numberOfClicks = 0;
+	let princessZeldaNoise = new Audio("media/zelda.mp3");
+	let yoshiNoise = new Audio("media/yoshi.mp3");
 
-
-// global variables to grab individual cell IDs
-let topLeftCell = document.getElementById('top-left');
-let topMiddleCell = document.getElementById('top-middle');
-let topRightCell = document.getElementById('top-right');
-let middleLeftCell = document.getElementById('middle-left');
-let middleMiddleCell = document.getElementById('middle-middle');
-let middleRightCell = document.getElementById('middle-right');
-let bottomLeftCell = document.getElementById('bottom-left');
-let bottomMiddleCell = document.getElementById('bottom-middle');
-let bottomRightCell = document.getElementById('bottom-right');
-
-// creates an array of all the cells which can be looped through with one event listener
-/*let arrayOfAllCells = [];
-arrayOfAllCells.push(topLeftCell, topMiddleCell, topRightCell);
-console.log(arrayOfAllCells);*/
-
-// global variables to grab row, column and diagonal classes - all the possible patterns for winning 
-// create a new function that checks through all winning patterns after every turn
-let leftColumn = document.getElementsByClassName('left-column');
-let middleColumn = document.getElementsByClassName('middle-column');
-let rightColumn = document.getElementsByClassName('right-column');
-let topRow = document.getElementsByClassName('top-row');
-let middleRow = document.getElementsByClassName('middle-row');
-let rightRow = document.getElementsByClassName('right-row');
-let leftDiagonal = document.getElementsByClassName('left-diagonal');
-let rightDiagonal = document.getElementsByClassName('right-diagonal');
-//let possibleWinCombos = [];
-
-// each individual cell listens for a "click" event and then runs the function cellClick 		
-topLeftCell.addEventListener("click", cellClick); 
-topMiddleCell.addEventListener("click", cellClick); 
-topRightCell.addEventListener("click", cellClick); 
-middleLeftCell.addEventListener("click", cellClick); 
-middleMiddleCell.addEventListener("click", cellClick); 
-middleRightCell.addEventListener("click", cellClick); 
-bottomLeftCell.addEventListener("click", cellClick); 
-bottomMiddleCell.addEventListener("click", cellClick); 
-bottomRightCell.addEventListener("click", cellClick); 
-
-//could I use an array of individual cells to make this DRYer?
-	//arrayOfAllCells.addEventListener("click", cellClickX);
-		/*for (var i = 0; i < arrayOfAllCells.length; i++) {
-			arrayOfAllCells[i].addEventListener("click", cellClickX(arrayOfAllCells[i]));
-		}*/
-
-function checkForWin(nodeList) {
-	//all three in the class have the same text content (or could check by CSS class?)
-	//WORKING: leftColumn, middleColumn, rightColumn, leftDiagonal, rightDiagonal
-	//NOT WORKING: topRow, middleRow, bottomRow
-
-	let checkArray = [];
-	let xCount = 0;
-	let oCount = 0;
-
-	// creates an array of all the text in all three cells in the class
-	for (let i = 0; i < nodeList.length; i++) {
-		checkArray.push(nodeList[i].innerText);
-	}
-
-	for (let i = 0; i < checkArray.length; i++) {
-		if (checkArray[i] === "X") {
-			xCount = xCount + 1;
-		} else if (checkArray[i] === "O") {
-			oCount = oCount + 1;
+	//this chunk of code sets a click event listener on every individual cell. if clicked, it calls the cellClick function
+	function addEventListenerList(list, event, fn) {
+		for (let i = 0; i < list.length; i++) {
+			list[i].addEventListener(event, fn, false);
 		}
 	}
-	if (xCount === 3 || oCount === 3) {
-		alert("We have a winner!");
-	}
-};
+	let nodeListOfAllCells = document.getElementsByTagName('td');
+	addEventListenerList(nodeListOfAllCells, "click", cellClick);
 
-function cellClick() {
-	numberOfClicks = numberOfClicks + 1;
+	// global variables to grab row, column and diagonal classes - all the possible patterns for winning 
+	// create a new function that checks through all winning patterns after every turn
+	let leftColumn = document.getElementsByClassName('left-column');
+	let middleColumn = document.getElementsByClassName('middle-column');
+	let rightColumn = document.getElementsByClassName('right-column');
+	let topRow = document.getElementsByClassName('top-row');
+	let middleRow = document.getElementsByClassName('middle-row');
+	let rightRow = document.getElementsByClassName('right-row');
+	let leftDiagonal = document.getElementsByClassName('left-diagonal');
+	let rightDiagonal = document.getElementsByClassName('right-diagonal');
 
-	for (let i = 0; i < this.classList.length; i++) {
-		// before it changes anything, checks to see if class of 'isClicked' has been added to the cell already 
-		// - there has got to be a better way to do this!
-		if (this.classList[i] === "isClicked") {
-			return;
+	function checkForWin(nodeList) {
+		//all three in the class have the same text content (or could check by CSS class?)
+		//WORKING: leftColumn, middleColumn, rightColumn, leftDiagonal, rightDiagonal
+		//NOT WORKING: topRow, middleRow, bottomRow
+
+		let checkArray = [];
+		let xCount = 0;
+		let oCount = 0;
+
+		// creates an array of all the text in all three cells in the class
+		for (let i = 0; i < nodeList.length; i++) {
+			checkArray.push(nodeList[i].innerText);
+		}
+
+		for (let i = 0; i < checkArray.length; i++) {
+			if (checkArray[i] === "X") {
+				xCount = xCount + 1;
+			} else if (checkArray[i] === "O") {
+				oCount = oCount + 1;
+			}
+		}
+		if (xCount === 3 || oCount === 3) {
+			alert("We have a winner!");
+		}
+	};
+
+	/*function customizeCell(this, text,sound,class1,class2) {
+		this.textContent = text;//"X"; //play awesome sound!
+		this.sound = sound; //yoshiNoise.play();
+			sound.play();
+		this.classList.add(class1); //this.classList.add("exes"); //add styles specific to the 'exes' class
+		this.classList.add(class2); //"isClicked"
+		//adds isClicked as a class to the specific cell -- there has got to be a better way to do this	
+	};*/
+
+	function cellClick() {
+		numberOfClicks = numberOfClicks + 1;
+
+		for (let i = 0; i < this.classList.length; i++) {
+			// before it changes anything, checks to see if class of 'isClicked' has been added to the cell already 
+			// - there has got to be a better way to do this!
+			if (this.classList[i] === "isClicked") {
+				return;
+			} 
+		}
+
+		// finds the remainder % to tell whether number of clicks is even or odd (determines whether X or O should appear)
+		let remainder = numberOfClicks % 2;
+
+		//if number of clicks is even, then 
+		if (remainder == 0) {
+			//customizeCell(this, "X",yoshiNoise,"exes","isClicked");
+			// change box text to an 'X'
+			this.textContent = "X";
+			//play awesome sound!
+			yoshiNoise.play();
+			//add styles specific to the 'exes' class
+			this.classList.add("exes");
+			//adds isClicked as a class to the specific cell -- there has got to be a better way to do this
+			this.classList.add("isClicked");
 		} 
-	}
+		//if number of clicks is odd, then 
+		else if (remainder == 1) {
+			// change box text to an 'O'
+			this.textContent = "O";
+			//play awesome sound!
+			princessZeldaNoise.play();
+			//add styles specific to the 'ohs' class
+			this.classList.add("ohs");
+			//adds isClicked as a class to the specific cell -- there has got to be a better way to do this
+			this.classList.add("isClicked");
 
-	// finds the remainder % to tell whether number of clicks is even or odd (determines whether X or O should appear)
-	let remainder = numberOfClicks % 2;
+		} else {
+			console.log("the number of clicks is neither odd nor even");
+		}	
 
-	//if number of clicks is even, then 
-	if (remainder == 0) {
-		// change box text to an 'X'
-		this.textContent = "X";
-		//play awesome sound!
-		yoshiNoise.play();
-		//add styles specific to the 'exes' class
-		this.classList.add("exes");
-		//adds isClicked as a class to the specific cell -- there has got to be a better way to do this
-		this.classList.add("isClicked");
-	} 
-	//if number of clicks is odd, then 
-	else if (remainder == 1) {
-		// change box text to an 'O'
-		this.textContent = "O";
-		//play awesome sound!
-		princessZeldaNoise.play();
-		//add styles specific to the 'ohs' class
-		this.classList.add("ohs");
-		//adds isClicked as a class to the specific cell -- there has got to be a better way to do this
-		this.classList.add("isClicked");
+		checkForWin(leftColumn);
+		checkForWin(middleColumn);
+		checkForWin(rightColumn);
+		checkForWin(topRow);
+		checkForWin(middleRow);
+		checkForWin(rightRow);
+		checkForWin(leftDiagonal);
+		checkForWin(rightDiagonal);
+	};
 
-	} else {
-		console.log("the number of clicks is neither odd nor even");
-	}	
+	// reset button logic
+	// event handler listens for 'click' event and then runs the callback function to reload the page
+	let buttonReset = document.getElementById('button-reset');
+	buttonReset.addEventListener("click", function() {
+		document.location.reload(true);
+	});
+ 
 
-	checkForWin(leftColumn);
-	checkForWin(middleColumn);
-	checkForWin(rightColumn);
-	checkForWin(topRow);
-	checkForWin(middleRow);
-	checkForWin(rightRow);
-	checkForWin(leftDiagonal);
-	checkForWin(rightDiagonal);
-};
+});  
 
-// reset button logic
-// event handler listens for 'click' event and then runs the callback function to reload the page
-let buttonReset = document.getElementById('button-reset');
-buttonReset.addEventListener("click", function() {
-	document.location.reload(true);
-});
 
