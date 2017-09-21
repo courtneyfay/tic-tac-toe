@@ -30,6 +30,11 @@ console.log("JS is loaded!");
 // other global variables
 let numberOfClicks = 0;
 
+//sweet music sounds
+let princessZeldaNoise = new Audio("media/zelda.mp3");
+let yoshiNoise = new Audio("media/yoshi.mp3");
+
+
 // global variables to grab individual cell IDs
 let topLeftCell = document.getElementById('top-left');
 let topMiddleCell = document.getElementById('top-middle');
@@ -119,6 +124,8 @@ function cellClick() {
 	if (remainder == 0) {
 		// change box text to an 'X'
 		this.textContent = "X";
+		//play awesome sound!
+		yoshiNoise.play();
 		//add styles specific to the 'exes' class
 		this.classList.add("exes");
 		//adds isClicked as a class to the specific cell -- there has got to be a better way to do this
@@ -128,6 +135,8 @@ function cellClick() {
 	else if (remainder == 1) {
 		// change box text to an 'O'
 		this.textContent = "O";
+		//play awesome sound!
+		princessZeldaNoise.play();
 		//add styles specific to the 'ohs' class
 		this.classList.add("ohs");
 		//adds isClicked as a class to the specific cell -- there has got to be a better way to do this

@@ -1,4 +1,3 @@
-
 /*BONUS
 -Fix the layout of the header						**NOT YET** 
 -Style the heading									**NOT YET**
@@ -48,11 +47,15 @@ td {
 }
 
 .exes {
-	background-color: blue;
-	color: white;
+	/*background-color: blue;
+	color: white;*/
+	background-image: url('https://static.giantbomb.com/uploads/original/9/95666/1910448-yoshi_egg_yoshi_render.png');
+	background-size: cover;
 }
 
 .ohs {
-	background-color: red;
-	color: navy;
+	/*background-color: red;
+	color: navy;*/
+	background-image: url('http://17rg073sukbm1lmjk9jrehb643.wpengine.netdna-cdn.com/wp-content/uploads/2014/09/zelda2.jpg');
+	background-size: cover;
 }
