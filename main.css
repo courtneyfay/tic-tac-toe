@@ -1,11 +1,11 @@
 
 /*BONUS
--Fix the layout of the header
--Style the heading
--style the reset button
--Style the gameboard
--Use cats and dogs instead of Xs and Os
--Add some basic animations using CSS animations
+-Fix the layout of the header						**NOT YET** 
+-Style the heading									**NOT YET**
+-style the reset button								**NOT YET**
+-Style the gameboard								**NOT YET**
+-Use cats and dogs instead of Xs and Os				**NOT YET**
+-Add some basic animations using CSS animations		**NOT YET**
 */
 * {
 	text-align: center;
@@ -55,32 +55,4 @@ td {
 .ohs {
 	background-color: red;
 	color: navy;
-}
-
-
-
-
-/*Testing to see if classes and IDs will work for vanilla JS*/
-
-/*
-#bottom-right {
-	background-color: pink;
-}
-.left-column {
-	background-color: pink;
-}
-.middle-column {
-	background-color: orange;
-}
-.right-column {
-	background-color: yellow;
-}
-.top-row {
-	background-color: pink;
-}
-.middle-row {
-	background-color: orange;
-}
-.bottom-row {
-	background-color: yellow;
 }

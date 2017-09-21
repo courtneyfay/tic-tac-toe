@@ -9,7 +9,7 @@ Hints and Tricks
 	3c. You will also need a variable to keep track of moves - this will be used to indicate whether or not to draw an X or an O. 	DONE
 
 REQUIREMENTS
--Solution should use ONLY jQuery or vanilla JavaScript - not some combination thereof												***NOT YET***
+-Solution should use ONLY jQuery or vanilla JavaScript - not some combination thereof												DONE
 -A user should be able to click on different squares to make a move 																DONE
 -Every click will alternate between marking an X and O 																				DONE
 -Upon marking of an individual cell, use JavaScript to add a class to each cell  
@@ -18,10 +18,10 @@ REQUIREMENTS
 -Reset button clears the contents of the board																						UPGRADED
 
 BONUS
--Display a message at the beginning of the game telling X or O to go first.
--Alert the winner if they have won three in a row. Hint: Determine a set of winning combinations. 
+-Display a message at the beginning of the game telling X or O to go first.															**NOT YET**
+-Alert the winner if they have won three in a row. Hint: Determine a set of winning combinations. 									MEH
 	Check those combinations on the board contents after every move.
--Add a scoreboard!
+-Add a scoreboard!																													**NOT YET**
 */ 
 
 console.log("JS is loaded!");
@@ -56,6 +56,7 @@ let middleRow = document.getElementsByClassName('middle-row');
 let rightRow = document.getElementsByClassName('right-row');
 let leftDiagonal = document.getElementsByClassName('left-diagonal');
 let rightDiagonal = document.getElementsByClassName('right-diagonal');
+//let possibleWinCombos = [];
 
 // each individual cell listens for a "click" event and then runs the function cellClick 		
 topLeftCell.addEventListener("click", cellClick); 
@@ -74,13 +75,38 @@ bottomRightCell.addEventListener("click", cellClick);
 			arrayOfAllCells[i].addEventListener("click", cellClickX(arrayOfAllCells[i]));
 		}*/
 
+function checkForWin(array) {
+	//all three in the class have the same text content (or could check by CSS class?)
+	//WORKING: leftColumn, middleColumn, rightColumn, leftDiagonal, rightDiagonal
+	//NOT WORKING: topRow, middleRow, bottomRow
+
+	let checkArray = [];
+	let xCount = 0;
+	let oCount = 0;
+
+	// creates an array of all the text in all three cells in the class
+	for (let i = 0; i < array.length; i++) {
+		checkArray.push(array[i].innerText);
+	}
+
+	for (let i = 0; i < checkArray.length; i++) {
+		if (checkArray[i] === "X") {
+			xCount = xCount + 1;
+		} else if (checkArray[i] === "O") {
+			oCount = oCount + 1;
+		}
+	}
+	if (xCount === 3 || oCount === 3) {
+		alert("We have a winner!");
+	}
+};
+
 function cellClick() {
 	numberOfClicks = numberOfClicks + 1;
 
 	for (let i = 0; i < this.classList.length; i++) {
-		console.log(this.classList[i]);
-
-		// before it changes anything, checks to see if class of 'isClicked' has been added to the cell already - there has got to be a better way to do this
+		// before it changes anything, checks to see if class of 'isClicked' has been added to the cell already 
+		// - there has got to be a better way to do this!
 		if (this.classList[i] === "isClicked") {
 			return;
 		} 
@@ -88,7 +114,6 @@ function cellClick() {
 
 	// finds the remainder % to tell whether number of clicks is even or odd (determines whether X or O should appear)
 	let remainder = numberOfClicks % 2;
-	console.log("remainder " + remainder);
 
 	//if number of clicks is even, then 
 	if (remainder == 0) {
@@ -111,25 +136,21 @@ function cellClick() {
 	} else {
 		console.log("the number of clicks is neither odd nor even");
 	}	
+
+	checkForWin(leftColumn);
+	checkForWin(middleColumn);
+	checkForWin(rightColumn);
+	checkForWin(topRow);
+	checkForWin(middleRow);
+	checkForWin(rightRow);
+	checkForWin(leftDiagonal);
+	checkForWin(rightDiagonal);
 };
 
 // reset button logic
-// event handler listens for 'click' event and then runs the callback function
+// event handler listens for 'click' event and then runs the callback function to reload the page
 let buttonReset = document.getElementById('button-reset');
 buttonReset.addEventListener("click", function() {
 	document.location.reload(true);
-	/*console.log("clicked on the reset button");
-	numberOfClicks = 0;
-
-	// local variable to grab all the cells by tag name 'td'
-	let allCells = document.getElementsByTagName('td');
-
-	// for loop clears the content of all cells and replaces with an empty string
-	for (let i = 0; i < allCells.length; i++) {
-		allCells[i].textContent = "";
-		allCells[i].style.backgroundColor = "white";
-	}*/
 });
-
-//
 
