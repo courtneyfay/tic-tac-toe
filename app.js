@@ -6,15 +6,15 @@ Hints and Tricks
 		something similar to locate your target elements. 
 		Try this in your console to make sure your selection works.																	DONE
 	3b. After finding the elements, start writing logic to listen for click events on those elements 								DONE
-	3c. You will also need a variable to keep track of moves - this will be used to indicate whether or not to draw an X or an O. 	
+	3c. You will also need a variable to keep track of moves - this will be used to indicate whether or not to draw an X or an O. 	DONE
 
 REQUIREMENTS
--Solution should use ONLY jQuery or vanilla JavaScript - not some combination thereof
--A user should be able to click on different squares to make a move
--Every click will alternate between marking an X and O
--Upon marking of an individual cell, use JavaScript to add a class to each cell 
-	to display separate colors (either background or text-both is better)
--A cell should not be able to be replayed once marked
+-Solution should use ONLY jQuery or vanilla JavaScript - not some combination thereof												***NOT YET***
+-A user should be able to click on different squares to make a move 																DONE
+-Every click will alternate between marking an X and O 																				DONE
+-Upon marking of an individual cell, use JavaScript to add a class to each cell  
+	to display separate colors (either background or text-both is better)															1/2 way 
+-A cell should not be able to be replayed once marked																				***NOT YET***
 -Reset button clears the contents of the board																						DONE
 
 BONUS
@@ -67,38 +67,65 @@ bottomLeftCell.addEventListener("click", cellClick);
 bottomMiddleCell.addEventListener("click", cellClick); 
 bottomRightCell.addEventListener("click", cellClick); 
 
+//could I use an array of individual cells to make this DRYer?
+	//arrayOfAllCells.addEventListener("click", cellClickX);
+		/*for (var i = 0; i < arrayOfAllCells.length; i++) {
+			arrayOfAllCells[i].addEventListener("click", cellClickX(arrayOfAllCells[i]));
+		}*/
+
+/* -Upon marking of an individual cell, use JavaScript to add a class to each cell  
+	to display separate colors (either background or text-both is better)	
+
+	some sample code
+<div id="div1" class="someclass">
+    <img ... id="image1" name="image1" />
+</div>
+Then
+
+var d = document.getElementById("div1");
+d.className += " otherclass";
+	*/
+
 function cellClick() {
 	numberOfClicks = numberOfClicks + 1;
 	
-	// finds the remainder to tell whether number of clicks is even or odd (determines whether X or O should appear)
+	// finds the remainder % to tell whether number of clicks is even or odd (determines whether X or O should appear)
 	let remainder = numberOfClicks % 2;
 	console.log("remainder " + remainder);
 
-	//if number of clicks is even (using remainder % trick), then change box to an X
+	console.log(this);
+
+	//if number of clicks is even, then 
 	if (remainder == 0) {
+		// change box text to an 'X'
 		this.textContent = "X";
+		// change background color to blue
+		this.style.backgroundColor = "blue";
+		// change text color to white
+		this.style.color = "white";
 	} 
-	//if number of clicks is odd, then change box to an O
+	//if number of clicks is odd, then 
 	else if (remainder == 1) {
+		// change box text to an 'O'
 		this.textContent = "O";
-	} else
-	{
+		// change background color to red
+		this.style.backgroundColor = "red";
+		// change text color to navy
+		this.style.color = "navy";
+	} else {
 		console.log("the number of clicks is neither odd nor even");
 	}
 	console.log("current number of clicks: " + numberOfClicks);
 };
 
-//could you use an array of individual cells to keep this DRY?
-	//arrayOfAllCells.addEventListener("click", cellClickX);
-		/*for (var i = 0; i < arrayOfAllCells.length; i++) {
-			arrayOfAllCells[i].addEventListener("click", cellClickX(arrayOfAllCells[i]));
-		}*/
+
 
 // reset button logic
 // event handler listens for 'click' event and then runs the callback function
 let buttonReset = document.getElementById('button-reset');
 buttonReset.addEventListener("click", function() {
 	console.log("clicked on the reset button");
+	numberOfClicks = 0;
 
 	// local variable to grab all the cells by tag name 'td'
 	let allCells = document.getElementsByTagName('td');
@@ -106,6 +133,7 @@ buttonReset.addEventListener("click", function() {
 	// for loop clears the content of all cells and replaces with an empty string
 	for (let i = 0; i < allCells.length; i++) {
 		allCells[i].textContent = "";
+		allCells[i].style.backgroundColor = "white";
 	}
 });
 
