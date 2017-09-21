@@ -80,7 +80,7 @@ bottomRightCell.addEventListener("click", cellClick);
 			arrayOfAllCells[i].addEventListener("click", cellClickX(arrayOfAllCells[i]));
 		}*/
 
-function checkForWin(array) {
+function checkForWin(nodeList) {
 	//all three in the class have the same text content (or could check by CSS class?)
 	//WORKING: leftColumn, middleColumn, rightColumn, leftDiagonal, rightDiagonal
 	//NOT WORKING: topRow, middleRow, bottomRow
@@ -90,8 +90,8 @@ function checkForWin(array) {
 	let oCount = 0;
 
 	// creates an array of all the text in all three cells in the class
-	for (let i = 0; i < array.length; i++) {
-		checkArray.push(array[i].innerText);
+	for (let i = 0; i < nodeList.length; i++) {
+		checkArray.push(nodeList[i].innerText);
 	}
 
 	for (let i = 0; i < checkArray.length; i++) {
