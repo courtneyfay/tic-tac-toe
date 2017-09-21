@@ -13,9 +13,9 @@ REQUIREMENTS
 -A user should be able to click on different squares to make a move 																DONE
 -Every click will alternate between marking an X and O 																				DONE
 -Upon marking of an individual cell, use JavaScript to add a class to each cell  
-	to display separate colors (either background or text-both is better)															1/2 way 
--A cell should not be able to be replayed once marked																				***NOT YET***
--Reset button clears the contents of the board																						DONE
+	to display separate colors (either background or text-both is better)															DONE
+-A cell should not be able to be replayed once marked																				DONE
+-Reset button clears the contents of the board																						UPGRADED
 
 BONUS
 -Display a message at the beginning of the game telling X or O to go first.
@@ -27,7 +27,7 @@ BONUS
 console.log("JS is loaded!");
 //is there a vanilla JS equivalent to .ready() ?
 
-// global variable to store number of clicks
+// other global variables
 let numberOfClicks = 0;
 
 // global variables to grab individual cell IDs
@@ -46,7 +46,8 @@ let bottomRightCell = document.getElementById('bottom-right');
 arrayOfAllCells.push(topLeftCell, topMiddleCell, topRightCell);
 console.log(arrayOfAllCells);*/
 
-// global variables to grab row, column and diagonal classes
+// global variables to grab row, column and diagonal classes - all the possible patterns for winning 
+// create a new function that checks through all winning patterns after every turn
 let leftColumn = document.getElementsByClassName('left-column');
 let middleColumn = document.getElementsByClassName('middle-column');
 let rightColumn = document.getElementsByClassName('right-column');
@@ -73,58 +74,51 @@ bottomRightCell.addEventListener("click", cellClick);
 			arrayOfAllCells[i].addEventListener("click", cellClickX(arrayOfAllCells[i]));
 		}*/
 
-/* -Upon marking of an individual cell, use JavaScript to add a class to each cell  
-	to display separate colors (either background or text-both is better)	
-
-	some sample code
-<div id="div1" class="someclass">
-    <img ... id="image1" name="image1" />
-</div>
-Then
-
-var d = document.getElementById("div1");
-d.className += " otherclass";
-	*/
-
 function cellClick() {
 	numberOfClicks = numberOfClicks + 1;
-	
+
+	for (let i = 0; i < this.classList.length; i++) {
+		console.log(this.classList[i]);
+
+		// before it changes anything, checks to see if class of 'isClicked' has been added to the cell already - there has got to be a better way to do this
+		if (this.classList[i] === "isClicked") {
+			return;
+		} 
+	}
+
 	// finds the remainder % to tell whether number of clicks is even or odd (determines whether X or O should appear)
 	let remainder = numberOfClicks % 2;
 	console.log("remainder " + remainder);
-
-	console.log(this);
 
 	//if number of clicks is even, then 
 	if (remainder == 0) {
 		// change box text to an 'X'
 		this.textContent = "X";
-		// change background color to blue
-		this.style.backgroundColor = "blue";
-		// change text color to white
-		this.style.color = "white";
+		//add styles specific to the 'exes' class
+		this.classList.add("exes");
+		//adds isClicked as a class to the specific cell -- there has got to be a better way to do this
+		this.classList.add("isClicked");
 	} 
 	//if number of clicks is odd, then 
 	else if (remainder == 1) {
 		// change box text to an 'O'
 		this.textContent = "O";
-		// change background color to red
-		this.style.backgroundColor = "red";
-		// change text color to navy
-		this.style.color = "navy";
+		//add styles specific to the 'ohs' class
+		this.classList.add("ohs");
+		//adds isClicked as a class to the specific cell -- there has got to be a better way to do this
+		this.classList.add("isClicked");
+
 	} else {
 		console.log("the number of clicks is neither odd nor even");
-	}
-	console.log("current number of clicks: " + numberOfClicks);
+	}	
 };
-
-
 
 // reset button logic
 // event handler listens for 'click' event and then runs the callback function
 let buttonReset = document.getElementById('button-reset');
 buttonReset.addEventListener("click", function() {
-	console.log("clicked on the reset button");
+	document.location.reload(true);
+	/*console.log("clicked on the reset button");
 	numberOfClicks = 0;
 
 	// local variable to grab all the cells by tag name 'td'
@@ -134,7 +128,7 @@ buttonReset.addEventListener("click", function() {
 	for (let i = 0; i < allCells.length; i++) {
 		allCells[i].textContent = "";
 		allCells[i].style.backgroundColor = "white";
-	}
+	}*/
 });
 
 //
