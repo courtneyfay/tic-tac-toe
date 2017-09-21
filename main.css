@@ -38,6 +38,7 @@ table#gameboard {
 	height: 600px;
 	border: 1px solid black;
 	border-collapse: collapse;
+	font-size: 50px;
 }
 
 td {
